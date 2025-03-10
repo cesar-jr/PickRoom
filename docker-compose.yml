@@ -1,0 +1,61 @@
+version: "3.9"
+services:
+    enquete:
+        depends_on:
+            - postgresqldb
+            - keydb
+        image: enquete-dev
+        restart: always
+        ports:
+            - "8080:80"
+        volumes:
+            # - C:\Users\Cesar\Documents\repositorio\notes\example-app:/app #prod
+            - ./:/var/www/html
+        networks:
+            - compose-network
+    keydb:
+        image: eqalpha/keydb:x86_64_v6.3.4
+        command: keydb-server --requirepass cachepass
+        restart: always
+        ports:
+            - "6380:6379"
+        volumes:
+            - keydb-data:/data
+        networks:
+            - compose-network
+    postgresqldb:
+        image: postgres:14
+        restart: always
+        environment:
+            - POSTGRES_PASSWORD=admin
+            - POSTGRES_USER=root
+        ports:
+            - "5433:5432"
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+            # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        networks:
+            - compose-network
+    mailpit:
+        image: axllent/mailpit
+        # container_name: mailpit
+        restart: unless-stopped
+        volumes:
+            - ./mailpit-data:/data
+        ports:
+            - 8025:8025
+            # - 1025:1025
+        environment:
+            MP_MAX_MESSAGES: 5000
+            MP_DATABASE: /data/mailpit.db
+            MP_SMTP_AUTH_ACCEPT_ANY: 1
+            MP_SMTP_AUTH_ALLOW_INSECURE: 1
+        networks:
+            - compose-network
+
+networks:
+    compose-network:
+        driver: bridge
+volumes:
+    postgres-data:
+    keydb-data:
