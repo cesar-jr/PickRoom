@@ -40,5 +40,10 @@ Route::get('/poll-create', function () {
 Route::get('/poll-list', function () {
     return view('poll.list');
 });
+Route::get('/poll-result', function () {
+    return view('poll.result');
+});
 
 require __DIR__ . '/auth.php';
+
+// survey hub é um nome legal, ou vote hub, ou poll connect, ou combinações dessas
