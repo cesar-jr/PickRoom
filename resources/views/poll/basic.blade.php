@@ -28,9 +28,9 @@
             <form action="">
                 <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white">Pergunta aqui</h2>
                 <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-200">Detalhes aqui</p>
-                <div class="mt-10 space-y-10">
+                <div class="mt-5 space-y-10">
                     <fieldset>
-                        <div class="mt-6 space-y-2">
+                        <div class="space-y-2">
                             <label
                                 for="Option1"
                                 class="flex cursor-pointer items-start gap-4 rounded-lg shadow-xs border border-gray-200 p-4 transition hover:bg-gray-50 has-[:checked]:bg-indigo-50 dark:border-gray-700 dark:hover:bg-gray-900 dark:has-[:checked]:bg-indigo-700/10">
@@ -102,13 +102,13 @@
                         </div>
                     </fieldset>
 
-                    <fieldset class="space-y-4 custom-radio-checkbox">
+                    <fieldset class="space-y-2 custom-radio-checkbox">
                         <div>
                             <label
                                 for="DeliveryStandard"
                                 class="flex cursor-pointer gap-4 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 p-4 text-sm font-medium shadow-xs has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-600 has-[:checked]:ring-1 has-[:checked]:ring-indigo-600 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900 dark:has-[:checked]:bg-indigo-700/10">
                                 <input
-                                    type="checkbox"
+                                    type="radio"
                                     name="DeliveryOption"
                                     value="DeliveryStandard"
                                     id="DeliveryStandard"
@@ -126,7 +126,7 @@
                                 for="DeliveryPriority"
                                 class="flex cursor-pointer gap-4 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 p-4 text-sm font-medium shadow-xs has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-600 has-[:checked]:ring-1 has-[:checked]:ring-indigo-600 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900 dark:has-[:checked]:bg-indigo-700/10">
                                 <input
-                                    type="checkbox"
+                                    type="radio"
                                     name="DeliveryOption"
                                     value="DeliveryPriority"
                                     id="DeliveryPriority"
@@ -143,7 +143,7 @@
                                 for="ThirdOpt"
                                 class="flex cursor-pointer gap-4 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 p-4 text-sm font-medium shadow-xs has-[:checked]:bg-indigo-50 has-[:checked]:border-indigo-600 has-[:checked]:ring-1 has-[:checked]:ring-indigo-600 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-900 dark:has-[:checked]:bg-indigo-700/10">
                                 <input
-                                    type="checkbox"
+                                    type="radio"
                                     name="DeliveryOption"
                                     value="ThirdOpt"
                                     id="ThirdOpt"
