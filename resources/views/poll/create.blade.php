@@ -1,7 +1,8 @@
 @props(['jsFile' => "poll-create.js"])
 <x-poll-layout :jsFile="$jsFile">
     <div class="w-full lg:max-w-1/2 mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-        <form action="">
+        <form method="POST" action="{{ route('polls.store') }}">
+            @csrf
             <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white">{{ __('New Question') }}</h2>
             <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-200">{{ __('Launch a new poll') }}</p>
             <div class="mt-3">
@@ -18,12 +19,12 @@
                 <fieldset class="flex gap-4">
                     <legend class="block text-sm/6 font-medium text-gray-700 dark:text-gray-300">{{ __('Single or multiple answers?') }}</legend>
                     <x-poll.radio-input name="answerType"
-                        value="SingleAnswer"
+                        value="SINGLE"
                         id="SingleAnswer" checked>
                         {{ __('Single') }}
                     </x-poll.radio-input>
                     <x-poll.radio-input name="answerType"
-                        value="MultipleAnswer"
+                        value="MULTIPLE"
                         id="MultipleAnswer">
                         {{ __('Multiple') }}
                     </x-poll.radio-input>
@@ -41,12 +42,12 @@
                             </div>
                             <div class="w-full lg:w-4/5">
                                 <div class="w-full">
-                                    <x-poll.text-input name="answer" required autofocus placeholder="{{__('Answer')}}" />
+                                    <x-poll.text-input class="answer" name="answer[]" required autofocus placeholder="{{__('Answer')}}" />
                                     <!-- verificar erros depois devido ao array -->
                                     <!-- <x-input-error :messages="$errors->get('question')" class="mt-2" /> -->
                                 </div>
                                 <div class="w-full">
-                                    <x-poll.text-input name="additional" autofocus placeholder="{{__('Additional text')}}" />
+                                    <x-poll.text-input class="additional" name="additional[]" autofocus placeholder="{{__('Additional text')}}" />
                                 </div>
                             </div>
                             <div class="flex place-content-center divDelete">

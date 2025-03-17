@@ -18,8 +18,8 @@ const btnDeleteFn = function () {
 const btnNewOption = function () {
     const newDiv = $("#optionsList").find(".clone").first().clone();
     newDiv.find(".btnDelete").on("click", btnDeleteFn);
-    newDiv.find("input[name=answer]").val("");
-    newDiv.find("input[name=additional]").val("");
+    newDiv.find("input.answer").val("");
+    newDiv.find("input.additional").val("");
     $("#optionsList").append(newDiv);
     const list = $("#optionsList").children(".clone");
     newDiv.find("p.num").text(`${list.length}`);
