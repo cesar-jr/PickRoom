@@ -39,6 +39,24 @@ class StorePollRequest extends FormRequest
                 'string',
                 Rule::enum(AnswerType::class),
             ],
+            'answer' => [
+                'required',
+                'array'
+            ],
+            'answer.*' => [
+                'required',
+                'string',
+                'max:255'
+            ],
+            'additional' => [
+                'sometimes',
+                'array'
+            ],
+            'additional.*' => [
+                'sometimes',
+                'string',
+                'nullable',
+            ],
         ];
     }
 }

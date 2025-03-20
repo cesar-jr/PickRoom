@@ -9,6 +9,8 @@ const btnDeleteFn = function () {
         $(this)
             .find("p.num")
             .text(`${index + 1}`);
+        $(this).find("input.answer").attr("name", `answer[${index}]`);
+        $(this).find("input.additional").attr("name", `additional[${index}]`);
         if (list.length <= minOptions) {
             $(this).find(".divDelete").hide();
         }
@@ -20,9 +22,14 @@ const btnNewOption = function () {
     newDiv.find(".btnDelete").on("click", btnDeleteFn);
     newDiv.find("input.answer").val("");
     newDiv.find("input.additional").val("");
+    newDiv.find("ul.errors").remove();
     $("#optionsList").append(newDiv);
     const list = $("#optionsList").children(".clone");
     newDiv.find("p.num").text(`${list.length}`);
+    newDiv.find("input.answer").attr("name", `answer[${list.length - 1}]`);
+    newDiv
+        .find("input.additional")
+        .attr("name", `additional[${list.length - 1}]`);
     if (list.length > minOptions) {
         list.each(function () {
             $(this).find(".divDelete").show();
@@ -38,9 +45,6 @@ $(function () {
     $("#btnNewOption").on("click", btnNewOption);
     $("#optionsList")
         .find(".clone")
-        .first()
-        .find(".divDelete")
-        .hide()
         .find(".btnDelete")
         .on("click", btnDeleteFn);
     // Prepare initial options list
