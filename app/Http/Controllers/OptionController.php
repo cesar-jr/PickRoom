@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreOptionsRequest;
-use App\Http\Requests\UpdateOptionsRequest;
-use App\Models\Options;
+use App\Http\Requests\StoreOptionRequest;
+use App\Http\Requests\UpdateOptionRequest;
+use App\Models\Option;
 
-class OptionsController extends Controller
+class OptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class OptionsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreOptionsRequest $request)
+    public function store(StoreOptionRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class OptionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Options $options)
+    public function show(Option $options)
     {
         //
     }
@@ -43,7 +43,7 @@ class OptionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Options $options)
+    public function edit(Option $options)
     {
         //
     }
@@ -51,7 +51,7 @@ class OptionsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateOptionsRequest $request, Options $options)
+    public function update(UpdateOptionRequest $request, Option $options)
     {
         //
     }
@@ -59,7 +59,7 @@ class OptionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Options $options)
+    public function destroy(Option $options)
     {
         //
     }

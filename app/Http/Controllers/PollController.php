@@ -6,8 +6,10 @@ use App\Enums\AnswerType;
 use App\Http\Requests\StorePollRequest;
 use App\Http\Requests\UpdatePollRequest;
 use App\Models\Poll;
+use App\Models\Option;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\DB;
 
 class PollController extends Controller
 {
@@ -32,8 +34,26 @@ class PollController extends Controller
      */
     public function store(StorePollRequest $request)
     {
-        $validated = Request::post();
-        dd($validated);
+        // DB::enableQueryLog();
+        $validated = $request->validated();
+        $poll = new Poll([
+            'question' => $validated['question'],
+            'details' => $validated['details'],
+            'answer_type' => $validated['answerType'],
+        ]);
+        $options = [];
+        foreach ($validated['answer'] as $index => $value) {
+            $options[] = new Option([
+                'answer' => $value,
+                'extra' => $validated['additional'][$index] ?? null,
+            ]);
+        }
+        DB::transaction(function () use ($request, $poll, $options) {
+            $request->user()->polls()->save($poll);
+            $poll->options()->saveMany($options); //NÃO é bulk insert, é várias queries insert simples
+        });
+        return redirect(route('polls.index')); //ainda não existe
+        // dd(DB::getQueryLog());
     }
 
     /**
