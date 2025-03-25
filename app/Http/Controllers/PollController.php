@@ -7,8 +7,9 @@ use App\Http\Requests\StorePollRequest;
 use App\Http\Requests\UpdatePollRequest;
 use App\Models\Poll;
 use App\Models\Option;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PollController extends Controller
@@ -18,7 +19,25 @@ class PollController extends Controller
      */
     public function index()
     {
-        //
+        return view('poll.list');
+    }
+
+    public function list(Request $request)
+    {
+        $data = $request->validate([
+            'search' => [ //verificar melhor esse search, maiusculas e minusculas e talvez fazer o role do espaço
+                'string',
+                'max:255',
+            ]
+        ]);
+        $records = Poll::whereBelongsTo($request->user())->withCount('votes')
+            ->where(function (Builder $query) use ($data) {
+                if ($data['search'] ?? null) {
+                    $query->where('question', 'ilike', '%' . $data['search'] . '%');
+                }
+            })
+            ->paginate(10)->withQueryString();
+        return $records;
     }
 
     /**
@@ -37,15 +56,15 @@ class PollController extends Controller
         // DB::enableQueryLog();
         $validated = $request->validated();
         $poll = new Poll([
-            'question' => $validated['question'],
-            'details' => $validated['details'],
+            'question' => e($validated['question']),
+            'details' => e($validated['details']),
             'answer_type' => $validated['answerType'],
         ]);
         $options = [];
         foreach ($validated['answer'] as $index => $value) {
             $options[] = new Option([
-                'answer' => $value,
-                'extra' => $validated['additional'][$index] ?? null,
+                'answer' => e($value),
+                'extra' => $validated['additional'][$index] ? e($validated['additional'][$index]) : null,
             ]);
         }
         DB::transaction(function () use ($request, $poll, $options) {

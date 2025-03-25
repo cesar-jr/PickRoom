@@ -9,7 +9,7 @@
                     <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
                         <x-search-icon class="text-gray-500 dark:text-gray-400" />
                     </div>
-                    <input type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Search for items">
+                    <input type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="{{ __('Search') }}">
                 </div>
                 <div class="flex place-content-center">
                     <x-primary-button class="ms-3">
@@ -31,68 +31,39 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">
-                            Apple MacBook Pro 17"
+                <tbody id="tableList">
+                    <tr class="original bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 question">
+                            Mock
+                        </td>
+                        <td class="px-6 py-4 votes">
+                            0
                         </td>
                         <td class="px-6 py-4">
-                            6
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">{{ __('See Results') }}</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">
-                            Microsoft Surface Pro
-                        </td>
-                        <td class="px-6 py-4">
-                            2
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">{{ __('See Results') }}</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">
-                            Magic Mouse 2
-                        </td>
-                        <td class="px-6 py-4">
-                            35
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">{{ __('See Results') }}</a>
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <td class="px-6 py-4">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget eros arcu. Fusce ut lacus id sem ultrices hendrerit sit amet vitae augue. Nullam non tempor lacus. In feugiat lorem nec urna faucibus interdum. Morbi facilisis odio ac erat lobortis blandit. Pellentesque porttitor, quam vel facilisis consectetur, mauris felis pellentesque odio, a vestibulum orci ligula nec lectus. Morbi at ultrices elit. Vivamus porttitor luctus diam, vitae consectetur lacus lobortis sed.
-                        </td>
-                        <td class="px-6 py-4">
-                            75662
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline">{{ __('See Results') }}</a>
+                            <a href="#" class="action font-medium text-indigo-600 dark:text-indigo-500 hover:underline">{{ __('See Results') }}</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <div role="status" class="text-center m-4 loading">
+                <x-spinner />
+                <span class="sr-only">Loading...</span>
+            </div>
             <div class="flex flex-col items-center">
                 <!-- Help text -->
                 <span class="text-sm text-gray-700 dark:text-gray-400">
-                    Showing <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span class="font-semibold text-gray-900 dark:text-white">10</span> of <span class="font-semibold text-gray-900 dark:text-white">100</span> Entries
+                    {{ __('Showing') }} <span class="font-semibold text-gray-900 dark:text-white" id="from">1</span> {{ __('to') }} <span class="font-semibold text-gray-900 dark:text-white" id="to">10</span> {{ __('of') }} <span class="font-semibold text-gray-900 dark:text-white" id="total">100</span> {{ __('Entries') }}
                 </span>
                 <div class="inline-flex m-2 xs:mt-0">
                     <!-- Buttons -->
-                    <button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-500 dark:hover:text-white">
+                    <button id="btnPrev" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-500 dark:hover:text-white disabled:opacity-25">
                         <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
                         </svg>
-                        Prev
+                        {{ __('Prev') }}
                     </button>
-                    <button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-500 dark:hover:text-white">
-                        Next
+                    <button id="btnNext" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-500 dark:hover:text-white disabled:opacity-25">
+                        {{ __('Next') }}
                         <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                         </svg>
