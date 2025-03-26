@@ -41,16 +41,18 @@ class StorePollRequest extends FormRequest
             ],
             'answer' => [
                 'required',
-                'array'
+                'array',
+                'min:2',
             ],
             'answer.*' => [
                 'required',
                 'string',
-                'max:255'
+                'max:255',
             ],
             'additional' => [
                 'sometimes',
-                'array'
+                'array',
+                'min:2',
             ],
             'additional.*' => [
                 'sometimes',

@@ -56,15 +56,15 @@ class PollController extends Controller
         // DB::enableQueryLog();
         $validated = $request->validated();
         $poll = new Poll([
-            'question' => e($validated['question']),
-            'details' => e($validated['details']),
+            'question' => $validated['question'],
+            'details' => $validated['details'],
             'answer_type' => $validated['answerType'],
         ]);
         $options = [];
         foreach ($validated['answer'] as $index => $value) {
             $options[] = new Option([
-                'answer' => e($value),
-                'extra' => $validated['additional'][$index] ? e($validated['additional'][$index]) : null,
+                'answer' => $value,
+                'extra' => $validated['additional'][$index] ?? null,
             ]);
         }
         DB::transaction(function () use ($request, $poll, $options) {
