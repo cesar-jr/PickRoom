@@ -28,4 +28,14 @@ class Poll extends Model
     {
         return $this->hasMany(Option::class);
     }
+
+    public function votes(): HasMany
+    {
+        return $this->hasMany(Vote::class);
+    }
+
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->with(['options'])->where($this->getRouteKeyName(), $value)->firstOrFail();
+    }
 }

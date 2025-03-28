@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PollController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,13 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/polls/list', [PollController::class, 'list'])->name('polls.list');
 });
 
+Route::get('/vote/login', [VoteController::class, 'redirectLogin'])->name('vote.login');
+Route::post('/vote/{poll}/store', [VoteController::class, 'store'])->name('vote.store');
+Route::get('/vote/{poll}', [VoteController::class, 'create'])->name('vote.create');
+
 Route::resource('polls', PollController::class)
     ->only(['index', 'create', 'store', 'edit', 'update'])
     ->middleware(['auth']);
-
-Route::get('/vote', function () {
-    return view('poll.basic');
-});
 
 Route::get('/poll-list', function () {
     return view('poll.list');

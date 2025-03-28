@@ -22,13 +22,13 @@
                         value="SINGLE"
                         id="SingleAnswer"
                         :checked="old('answerType')!='MULTIPLE'">
-                        {{ __('Single') }}
+                        <p class="mt-1 text-gray-900 dark:text-white">{{ __('Single') }}</p>
                     </x-poll.radio-input>
                     <x-poll.radio-input name="answerType"
                         value="MULTIPLE"
                         id="MultipleAnswer"
                         :checked="old('answerType')=='MULTIPLE'">
-                        {{ __('Multiple') }}
+                        <p class="mt-1 text-gray-900 dark:text-white">{{ __('Multiple') }}</p>
                     </x-poll.radio-input>
                 </fieldset>
                 <x-input-error :messages="$errors->get('answerType')" class="mt-2" />
