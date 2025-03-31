@@ -30,19 +30,28 @@ class VoteController extends Controller
      */
     public function create(Request $request, Poll $poll)
     {
+        $logged = Auth::check();
         $data = [
-            'logged' => Auth::check(),
+            'logged' => $logged,
             'poll' => $poll,
+            'vote' => $logged ? Vote::whereBelongsTo($request->user())->whereBelongsTo($poll)->first() : null,
         ];
+        if (!$poll->active)
+            abort(404);
         return view('poll.basic', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreVoteRequest $request)
+    public function store(StoreVoteRequest $request, Poll $poll)
     {
-        //
+        $validated = $request->validated();
+        $vote = new Vote($validated);
+        $vote->poll()->associate($poll);
+        $vote->user()->associate($request->user());
+        $vote->save();
+        return redirect(route("dashboard")); // confirmar se vai ser isso mesmo
     }
 
     /**

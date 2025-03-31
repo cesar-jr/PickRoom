@@ -71,7 +71,7 @@ class PollController extends Controller
             $request->user()->polls()->save($poll);
             $poll->options()->saveMany($options); //NÃO é bulk insert, é várias queries insert simples
         });
-        return redirect(route('polls.index')); //ainda não existe
+        return redirect(route('polls.index'));
         // dd(DB::getQueryLog());
     }
 

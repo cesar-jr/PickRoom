@@ -15,15 +15,19 @@
                 </a>
             </p>
             @endunless
+            @foreach($errors->all() as $message)
+            <p class="mt-1 text-sm/6 text-red-500 dark:text-red-200">{{ $message }}</p>
+            @endforeach
             <div class="mt-5 space-y-10">
                 <fieldset class="space-y-2">
-                    @if($poll->answer_type=='SINGLE')
+                    @if($poll->answer_type==\App\Enums\AnswerType::SINGLE)
                     @foreach($poll->options as $option)
                     <x-poll.radio-input
                         :id="$option->id"
                         name="options[]"
                         :value="$option->id"
-                        :disabled="!$logged">
+                        :disabled="!$logged || $vote"
+                        :checked="$vote && in_array($option->id, $vote->options)">
                         <p class="text-gray-900 dark:text-white">{{ $option->answer }}</p>
                         @if($option->extra)
                         <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $option->extra }}</p>
@@ -36,7 +40,8 @@
                         :id="$option->id"
                         name="options[]"
                         :value="$option->id"
-                        :disabled="!$logged">
+                        :disabled="!$logged || $vote"
+                        :checked="$vote && in_array($option->id, $vote->options)">
                         <strong class="font-medium text-gray-900 dark:text-white">{{ $option->answer }}</strong>
                         @if($option->extra)
                         <p class="mt-1 text-sm text-pretty text-gray-700 dark:text-gray-200">{{ $option->extra }}</p>
@@ -47,7 +52,7 @@
                 </fieldset>
             </div>
             <div class="mt-5 flex place-content-center lg:place-content-end">
-                <x-primary-button class="ms-3" :disabled="!$logged">
+                <x-primary-button class="ms-3" :disabled="!$logged || $vote" id="btnConfirm">
                     {{ __('Confirm') }}
                 </x-primary-button>
             </div>
