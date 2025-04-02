@@ -32,9 +32,7 @@ const loadTable = function ({ search, url } = {}) {
                     newRow.find(".question").text(value.question);
                     newRow.find(".votes").text(value.votes_count);
                     newRow.find(".votes").text(value.votes_count);
-                    newRow
-                        .find(".action")
-                        .attr("href", `/polls/result/${value.id}`);
+                    newRow.find(".action").attr("href", `/polls/${value.id}`);
                     newRow.show();
                     listNode.append(newRow);
                 });

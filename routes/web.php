@@ -25,7 +25,7 @@ Route::get('/vote/login', [VoteController::class, 'redirectLogin'])->name('vote.
 Route::get('/vote/{poll}', [VoteController::class, 'create'])->name('vote.create');
 
 Route::resource('polls', PollController::class)
-    ->only(['index', 'create', 'store', 'edit', 'update'])
+    ->only(['index', 'create', 'store', 'edit', 'update', 'show'])
     ->middleware(['auth']);
 
 Route::get('/poll-list', function () {

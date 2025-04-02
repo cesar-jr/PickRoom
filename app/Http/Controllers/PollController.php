@@ -7,10 +7,12 @@ use App\Http\Requests\StorePollRequest;
 use App\Http\Requests\UpdatePollRequest;
 use App\Models\Poll;
 use App\Models\Option;
+use App\Models\Vote;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class PollController extends Controller
 {
@@ -80,7 +82,29 @@ class PollController extends Controller
      */
     public function show(Poll $poll)
     {
-        //
+        Gate::authorize('view', $poll);
+
+        $poll_id = $poll->id;
+        $votes_count = Vote::whereBelongsTo($poll)->count();
+
+        $result_query = DB::select("
+            SELECT elem::text AS id, COUNT(*) AS occurrences
+            FROM votes, jsonb_array_elements_text(options) AS elem
+            WHERE poll_id = $poll_id
+            GROUP BY elem::text;
+        ");
+
+        $votes_by_options = [];
+        foreach ($result_query as $record) {
+            $votes_by_options[$record->id]['total'] = $record->occurrences;
+            $votes_by_options[$record->id]['percentage'] = round(($record->occurrences / $votes_count) * 100);
+        }
+
+        return view('poll.result', [
+            'poll' => $poll,
+            'votes_by_options' => $votes_by_options,
+            'votes_count' => $votes_count,
+        ]);
     }
 
     /**
