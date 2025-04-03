@@ -120,7 +120,11 @@ class PollController extends Controller
      */
     public function update(UpdatePollRequest $request, Poll $poll)
     {
-        //
+        Gate::authorize('update', $poll);
+        $validated = $request->validated();
+        $poll->active = !!$validated['active'];
+        $poll->save();
+        return redirect(route('polls.show', ['poll' => $poll]));
     }
 
     /**

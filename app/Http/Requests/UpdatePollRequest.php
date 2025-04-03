@@ -11,7 +11,7 @@ class UpdatePollRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->route('poll')->active;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdatePollRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'active' => [
+                'required',
+                'boolean',
+            ],
         ];
     }
 }
