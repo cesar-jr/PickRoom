@@ -20,6 +20,7 @@
     @isset($jsFile)
     @vite(["resources/js/pages/$jsFile"])
     @endisset
+    @stack('scripts')
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
