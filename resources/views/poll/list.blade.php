@@ -12,9 +12,9 @@
                     <input type="text" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="{{ __('Search') }}">
                 </div>
                 <div class="flex place-content-center">
-                    <x-primary-button class="ms-3">
+                    <x-primary-button-link href="{{ route('polls.create') }}" class="ms-3">
                         {{ __('New') }}
-                    </x-primary-button>
+                    </x-primary-button-link>
                 </div>
             </div>
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -46,7 +46,7 @@
                 </tbody>
             </table>
             <div role="status" class="text-center m-4 loading">
-                <x-spinner />
+                <x-spinner class="w-8 h-8" />
                 <span class="sr-only">Loading...</span>
             </div>
             <div class="flex flex-col items-center">
