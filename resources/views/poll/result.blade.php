@@ -26,7 +26,7 @@
             @endforeach
         </div>
         <div class="flex place-content-center mt-4">
-            <x-primary-button type="button" :disabled="!$poll->active" confirm-modal="end-poll" class="ms-3">
+            <x-primary-button type="button" :disabled="!$poll->active" data-confirm-modal="end-poll" class="ms-3">
                 {{ __('End Poll') }}
             </x-primary-button>
             @if($poll->active)

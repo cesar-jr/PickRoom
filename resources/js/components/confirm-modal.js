@@ -13,7 +13,7 @@ $(function () {
                 $(this).fadeOut();
             });
     });
-    $("button[confirm-modal]").on("click", function () {
-        $(`#${$(this).attr("confirm-modal")}`).fadeIn();
+    $("button[data-confirm-modal]").on("click", function () {
+        $(`#${$(this).data("confirm-modal")}`).fadeIn();
     });
 });
