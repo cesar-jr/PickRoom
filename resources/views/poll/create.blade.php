@@ -58,7 +58,7 @@
                             </div>
                             <div class="flex place-content-center divDelete">
                                 <x-secondary-button class="ms-3 h-fit btnDelete">
-                                    <x-trash-icon />
+                                    <x-icons.trash />
                                 </x-secondary-button>
                             </div>
                         </div>
