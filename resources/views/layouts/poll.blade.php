@@ -16,21 +16,30 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.7.1.min.js') }}"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/layouts/navigation.js'])
     @isset($jsFile)
     @vite(["resources/js/pages/$jsFile"])
     @endisset
     @stack('scripts')
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-        <div>
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </div>
-        {{ $slot }}
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        @include('layouts.new-navigation')
+
+        <!-- Page Heading -->
+        @isset($header)
+        <header class="bg-white dark:bg-gray-800 shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+        @endisset
+
+        <!-- Page Content -->
+        <main class="text-gray-900 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+            {{ $slot }}
+        </main>
     </div>
 </body>
 
