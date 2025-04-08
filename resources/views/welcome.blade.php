@@ -1223,26 +1223,6 @@
                     </div>
                     @if (Route::has('login'))
                     <nav class="-mx-3 flex flex-1 justify-end">
-                        <a
-                            href="{{ url('/vote') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            Voto
-                        </a>
-                        <a
-                            href="{{ url('/poll-create') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            Criar voto
-                        </a>
-                        <a
-                            href="{{ url('/poll-list') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            Lista
-                        </a>
-                        <a
-                            href="{{ url('/poll-result') }}"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                            Result
-                        </a>
                         @auth
                         <a
                             href="{{ url('/dashboard') }}"

@@ -5,11 +5,17 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="w-full lg:max-w-1/2 py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+                <div class="flex justify-center p-3 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+                </div>
+                <div class="flex justify-center p-3 text-gray-900 dark:text-gray-100">
+                    <!-- trocar esse texto para translation plural depois -->
+                    {{ __("You have voted on") }}
+                    <p class="mx-1 text-rose-600 dark:text-lime-400">{{ $votes_count }}</p>
+                    {{ __("polls") }}
                 </div>
             </div>
         </div>
