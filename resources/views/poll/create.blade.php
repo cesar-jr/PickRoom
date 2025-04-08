@@ -1,5 +1,5 @@
 @props(['jsFile' => "poll-create.js"])
-<x-poll-layout :jsFile="$jsFile">
+<x-app-layout :jsFile="$jsFile">
     <div class="w-full lg:max-w-1/2 mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
         <a class="underline text-md text-indigo-600 dark:text-indigo-500 hover:text-indigo-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('polls.index') }}">
             {{ __('Back') }}
@@ -87,4 +87,4 @@
     </div>
     </form>
     </div>
-</x-poll-layout>
+</x-app-layout>

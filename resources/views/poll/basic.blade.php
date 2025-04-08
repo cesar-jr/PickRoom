@@ -1,5 +1,5 @@
 @props(['jsFile' => "poll.js"])
-<x-poll-layout :jsFile="$jsFile">
+<x-app-layout :jsFile="$jsFile">
     <div class="w-full lg:max-w-1/2 mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
         <form method="POST" action="{{ route('vote.store', ['poll' => $poll->id]) }}">
             @csrf
@@ -58,4 +58,4 @@
             </div>
         </form>
     </div>
-</x-poll-layout>
+</x-app-layout>

@@ -1,5 +1,5 @@
 @props(['jsFile' => "list.js"])
-<x-poll-layout :jsFile="$jsFile">
+<x-app-layout :jsFile="$jsFile">
     <div class="w-full lg:max-w-1/2 mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
         <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white mb-4">Minhas enquetes</h2>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -101,4 +101,4 @@
             </nav> -->
         </div>
     </div>
-</x-poll-layout>
+</x-app-layout>
