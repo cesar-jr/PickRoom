@@ -1,13 +1,18 @@
 @props(['jsFile' => "poll-create.js"])
 <x-app-layout :jsFile="$jsFile">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('New Question') }}
+        </h2>
+    </x-slot>
     <div class="w-full lg:max-w-1/2 mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
         <a class="underline text-md text-indigo-600 dark:text-indigo-500 hover:text-indigo-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('polls.index') }}">
             {{ __('Back') }}
         </a>
         <form method="POST" action="{{ route('polls.store') }}">
             @csrf
-            <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white">{{ __('New Question') }}</h2>
-            <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-200">{{ __('Launch a new poll') }}</p>
+            <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white">{{ __('Launch a new poll') }}</h2>
+            <!-- <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-200">{{ __('Launch a new poll') }}</p> -->
             <div class="mt-3">
                 <x-input-label for="question" :value="__('Question')" />
                 <x-poll.text-input name="question" id="question" :value="old('question')" required autofocus />

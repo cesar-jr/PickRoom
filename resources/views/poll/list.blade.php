@@ -1,7 +1,11 @@
 @props(['jsFile' => "list.js"])
 <x-app-layout :jsFile="$jsFile">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Polls') }}
+        </h2>
+    </x-slot>
     <div class="w-full lg:max-w-1/2 mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-        <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white mb-4">Minhas enquetes</h2>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between p-4">
                 <label for="table-search" class="sr-only">Search</label>
