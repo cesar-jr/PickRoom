@@ -42,9 +42,6 @@
             </form>
             <x-confirm-modal id="end-poll" :question="__('Are you sure you want to end this poll?')" />
             @endif
-            @if(Session::has('message'))
-            <x-toast :type="Session::get('message-type', 'info')">{{ Session::get('message') }}</x-toast>
-            @endif
         </div>
     </div>
 </x-app-layout>

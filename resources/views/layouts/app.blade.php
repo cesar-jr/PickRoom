@@ -20,6 +20,9 @@
     @isset($jsFile)
     @vite(["resources/js/pages/$jsFile"])
     @endisset
+    @if(Session::has('message'))
+    @vite(["resources/js/components/toast.js"])
+    @endif
     @stack('scripts')
 </head>
 
@@ -40,6 +43,9 @@
         <main class="text-gray-900 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             {{ $slot }}
         </main>
+        @if(Session::has('message'))
+        <x-toast :type="Session::get('message-type', 'info')">{{ Session::get('message') }}</x-toast>
+        @endif
     </div>
 </body>
 

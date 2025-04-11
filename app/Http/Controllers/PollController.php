@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\AnswerType;
 use App\Http\Requests\StorePollRequest;
 use App\Http\Requests\UpdatePollRequest;
 use App\Models\Poll;
@@ -13,7 +12,6 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Session;
 
 class PollController extends Controller
 {
@@ -125,8 +123,7 @@ class PollController extends Controller
         $validated = $request->validated();
         $poll->active = !!$validated['active'];
         $poll->save();
-        Session::flash("message", __("Poll no longer active"));
-        Session::flash("message-type", "success");
+        $this->toast(__("Poll no longer active"), "success");
         return redirect(route('polls.show', ['poll' => $poll]));
     }
 
