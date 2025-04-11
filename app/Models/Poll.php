@@ -6,6 +6,7 @@ use App\Enums\AnswerType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Hidehalo\Nanoid\Client as Nanoid;
 
 class Poll extends Model
 {
@@ -18,7 +19,18 @@ class Poll extends Model
 
     protected $hidden = [
         'user_id',
+        'id',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $nanoid = new Nanoid();
+            $model->slug = $nanoid->generateId(10);
+        });
+    }
 
     public function user(): BelongsTo
     {
@@ -38,6 +50,11 @@ class Poll extends Model
     public function resolveRouteBinding($value, $field = null)
     {
         return $this->with(['options'])->where($this->getRouteKeyName(), $value)->firstOrFail();
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     protected function casts(): array

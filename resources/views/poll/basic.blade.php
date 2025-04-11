@@ -1,7 +1,7 @@
 @props(['jsFile' => "poll.js"])
 <x-app-layout :jsFile="$jsFile">
     <div class="w-full lg:max-w-1/2 mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-        <form method="POST" action="{{ route('vote.store', ['poll' => $poll->id]) }}">
+        <form method="POST" action="{{ route('vote.store', ['poll' => $poll->slug]) }}">
             @csrf
             <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white">{{ $poll->question }}</h2>
             @if($poll->details)

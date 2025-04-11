@@ -22,10 +22,10 @@
                     @endif
                 </div>
                 <div class="w-full lg:max-w-5/12 mb-4">
-                    <x-progress-bar :percentage="$votes_by_options[$option->id]['percentage']" />
+                    <x-progress-bar :percentage="$votes_by_options[$option->id]['percentage'] ?? 0" />
                 </div>
                 <div class="w-full lg:max-w-1/12">
-                    <strong class="font-medium text-gray-700 dark:text-gray-200">{{ $votes_by_options[$option->id]['total'] . ' ' . __('Votes') }}</strong>
+                    <strong class="font-medium text-gray-700 dark:text-gray-200">{{ ($votes_by_options[$option->id]['total'] ?? 0) . ' ' . __('Votes') }}</strong>
                 </div>
             </div>
             @endforeach
@@ -35,7 +35,7 @@
                 {{ __('End Poll') }}
             </x-primary-button>
             @if($poll->active)
-            <form id="deactivate" action="{{ route('polls.update', ['poll' => $poll->id]) }}" method="POST" class="hidden">
+            <form id="deactivate" action="{{ route('polls.update', ['poll' => $poll->slug]) }}" method="POST" class="hidden">
                 @csrf
                 @method('PATCH')
                 <input type="hidden" name="active" value="0">

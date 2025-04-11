@@ -44,7 +44,7 @@ class StoreVoteRequest extends FormRequest
                 // the following rule will throw SQL error if someone tries to tamper values (not numbers)
                 // it's not ideal but it shouldn't cause trouble, if it does, custom rule will be the way...
                 // Btw it's defined here instead of on its children below due to N+1 query problems
-                Rule::exists(Option::class, 'id')->where('poll_id', $this->route()->originalParameter('poll')),
+                Rule::exists(Option::class, 'id')->where('poll_id', $this->route('poll')->id),
             ],
             'options.*' => [
                 'required',
