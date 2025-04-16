@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\AnswerType;
+use App\Enums\PollType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,6 +16,7 @@ class Poll extends Model
         'details',
         'answer_type',
         'active',
+        'type',
     ];
 
     protected $hidden = [
@@ -61,6 +63,7 @@ class Poll extends Model
     {
         return [
             'answer_type' => AnswerType::class,
+            'type' => PollType::class,
         ];
     }
 }

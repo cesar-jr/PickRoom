@@ -1,4 +1,4 @@
-console.log("list.js");
+console.log("public-list.js");
 
 const loading = function (loading) {
     if (loading) {
@@ -19,7 +19,7 @@ const loadTable = function ({ search, url } = {}) {
         .get(url ?? "/polls/list", {
             params: {
                 search,
-                type: "user",
+                type: "public",
             },
         })
         .then((response) => {
@@ -32,7 +32,7 @@ const loadTable = function ({ search, url } = {}) {
                     newRow.addClass("clone").removeClass("original");
                     newRow.find(".question").text(value.question);
                     newRow.find(".votes").text(value.votes_count);
-                    newRow.find(".action").attr("href", `/polls/${value.slug}`);
+                    newRow.find(".action").attr("href", `/vote/${value.slug}`);
                     newRow.show();
                     listNode.append(newRow);
                 });

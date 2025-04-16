@@ -11,11 +11,14 @@
         </a>
         <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white">{{ $poll->question }}</h2>
         <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-200">{{ $poll->details }}</p>
+        <hr class="border border-gray-900 my-2" />
         <p class="mt-1 text-md/5 text-gray-600 dark:text-gray-200">{{ __('Votes') }}: {{ $votes_count }}</p>
+        <p class="mt-1 text-md/5 text-gray-600 dark:text-gray-200">{{ $poll->type==\App\Enums\PollType::PUBLIC ? ('🔓 ' . __('Public')) : ('🔒 ' . __('Private')) }} {{ __('Poll') }}</p>
         @if($poll->active)
         <p id="link-vote" data-link="{{ route('vote.create', ['poll' => $poll->slug]) }}" class="cursor-pointer text-md text-indigo-600 dark:text-indigo-500 hover:text-indigo-900 dark:hover:text-indigo-100 rounded-md">{{ __('Copy Poll link') }}</p>
         <p id="link-vote-temp" class="hidden text-md text-indigo-600 dark:text-indigo-500 rounded-md">{{ __('Copied to clipboard') }}</p>
         @endif
+        <hr class="border border-gray-900 my-2" />
         <div class="mt-5 space-y-2">
             @foreach($poll->options as $option)
             <div class="flex flex-col lg:flex-row gap-4 rounded-lg shadow-xs border border-gray-200 p-4 transition bg-indigo-50 dark:border-gray-700 dark:bg-indigo-700/10">

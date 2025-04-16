@@ -16,8 +16,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('polls.index')" :active="request()->routeIs('polls.index')">
+                    <x-nav-link :href="route('polls.my')" :active="request()->routeIs('polls.my')">
                         {{ __('My polls') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('polls.index')" :active="request()->routeIs('polls.index')">
+                        {{ __('Public polls') }}
                     </x-nav-link>
                 </div>
                 @endauth
@@ -86,8 +89,11 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('polls.index')" :active="request()->routeIs('polls.index')">
+            <x-responsive-nav-link :href="route('polls.my')" :active="request()->routeIs('polls.my')">
                 {{ __('My polls') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('polls.index')" :active="request()->routeIs('polls.index')">
+                {{ __('Public polls') }}
             </x-responsive-nav-link>
         </div>
 

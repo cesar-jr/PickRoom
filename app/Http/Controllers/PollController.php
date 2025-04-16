@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PollType;
 use App\Http\Requests\StorePollRequest;
 use App\Http\Requests\UpdatePollRequest;
 use App\Models\Poll;
@@ -20,6 +21,11 @@ class PollController extends Controller
      */
     public function index()
     {
+        return view('poll.public-list');
+    }
+
+    public function my()
+    {
         return view('poll.list');
     }
 
@@ -29,16 +35,24 @@ class PollController extends Controller
             'search' => [ //verificar melhor esse search, maiusculas e minusculas e talvez fazer o role do espaço
                 'string',
                 'max:255',
-            ]
+            ],
+            'type' => [
+                'required',
+                'string',
+                'in:user,public',
+            ],
         ]);
-        $records = Poll::whereBelongsTo($request->user())->withCount('votes')
-            ->where(function (Builder $query) use ($data) {
-                if ($data['search'] ?? null) {
-                    $query->where('question', 'ilike', '%' . $data['search'] . '%');
-                }
-            })
-            ->paginate(10)->withQueryString();
-        return $records;
+        if ($data['type'] == 'public') {
+            $records = Poll::where('type', PollType::PUBLIC);
+        } else {
+            $records = Poll::whereBelongsTo($request->user())->withCount('votes');
+        }
+        $records->where(function (Builder $query) use ($data) {
+            if ($data['search'] ?? null) {
+                $query->where('question', 'ilike', '%' . $data['search'] . '%');
+            }
+        })->orderBy('id', 'desc');
+        return $records->paginate(10)->withQueryString();
     }
 
     /**
@@ -60,6 +74,7 @@ class PollController extends Controller
             'question' => $validated['question'],
             'details' => $validated['details'],
             'answer_type' => $validated['answerType'],
+            'type' => $validated['type'],
         ]);
         $options = [];
         foreach ($validated['answer'] as $index => $value) {
@@ -72,7 +87,7 @@ class PollController extends Controller
             $request->user()->polls()->save($poll);
             $poll->options()->saveMany($options); //NÃO é bulk insert, é várias queries insert simples
         });
-        return redirect(route('polls.index'));
+        return redirect(route('polls.my'));
         // dd(DB::getQueryLog());
     }
 

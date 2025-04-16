@@ -25,6 +25,24 @@
             </div>
             <div class="mt-3">
                 <fieldset class="flex gap-4">
+                    <legend class="block text-sm/6 font-medium text-gray-700 dark:text-gray-300">{{ __('Public or private poll?') }}</legend>
+                    <x-poll.radio-input name="type"
+                        value="PUBLIC"
+                        id="PublicType"
+                        :checked="old('type')!='PRIVATE'">
+                        <p class="mt-1 text-gray-900 dark:text-white">{{ __('Public') }}</p>
+                    </x-poll.radio-input>
+                    <x-poll.radio-input name="type"
+                        value="PRIVATE"
+                        id="PrivateType"
+                        :checked="old('type')=='PRIVATE'">
+                        <p class="mt-1 text-gray-900 dark:text-white">{{ __('Private') }}</p>
+                    </x-poll.radio-input>
+                </fieldset>
+                <x-input-error :messages="$errors->get('type')" class="mt-2" />
+            </div>
+            <div class="mt-3">
+                <fieldset class="flex gap-4">
                     <legend class="block text-sm/6 font-medium text-gray-700 dark:text-gray-300">{{ __('Single or multiple answers?') }}</legend>
                     <x-poll.radio-input name="answerType"
                         value="SINGLE"

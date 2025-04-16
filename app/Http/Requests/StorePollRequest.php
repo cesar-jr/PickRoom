@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Enums\AnswerType;
+use App\Enums\PollType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -33,6 +34,11 @@ class StorePollRequest extends FormRequest
             'details' => [
                 'string',
                 'nullable',
+            ],
+            'type' => [
+                'required',
+                'string',
+                Rule::enum(PollType::class),
             ],
             'answerType' => [
                 'required',
