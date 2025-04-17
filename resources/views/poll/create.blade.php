@@ -98,11 +98,6 @@
 
     <div class="mt-5 space-y-5 lg:space-y-0 flex flex-col lg:flex-row lg:place-content-end">
         <div class="flex place-content-center">
-            <x-secondary-button class="ms-3">
-                {{ __('Preview') }}
-            </x-secondary-button>
-        </div>
-        <div class="flex place-content-center">
             <x-primary-button class="ms-3">
                 {{ __('Confirm') }}
             </x-primary-button>

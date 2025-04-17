@@ -31,10 +31,12 @@ class VoteController extends Controller
     public function create(Request $request, Poll $poll)
     {
         $logged = Auth::check();
+        $vote = $logged ? Vote::whereBelongsTo($request->user())->whereBelongsTo($poll)->first() : null;
         $data = [
             'logged' => $logged,
             'poll' => $poll,
-            'vote' => $logged ? Vote::whereBelongsTo($request->user())->whereBelongsTo($poll)->first() : null,
+            'disabled' => !$logged || $vote,
+            'checked' => $vote?->options ?? [],
         ];
         if (!$poll->active)
             abort(404);

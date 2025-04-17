@@ -13,5 +13,8 @@ $(function () {
         // confirm disabled means can't vote
         clickInput();
         $("input[name=options\\[\\]]").on("click", clickInput);
+        $("#vote").on("submit", function (e) {
+            $("#btnConfirm").prop("disabled", true).find("div").show();
+        });
     }
 });
