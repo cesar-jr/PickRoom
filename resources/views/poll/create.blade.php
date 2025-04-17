@@ -6,9 +6,6 @@
         </h2>
     </x-slot>
     <div class="w-full lg:max-w-1/2 mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-        <a class="underline text-md text-indigo-600 dark:text-indigo-500 hover:text-indigo-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('polls.index') }}">
-            {{ __('Back') }}
-        </a>
         <form method="POST" action="{{ route('polls.store') }}">
             @csrf
             <h2 class="text-xl/7 font-semibold text-gray-900 dark:text-white">{{ __('Launch a new poll') }}</h2>
@@ -96,7 +93,12 @@
             </div>
     </div>
 
-    <div class="mt-5 space-y-5 lg:space-y-0 flex flex-col lg:flex-row lg:place-content-end">
+    <div class="mt-5 space-y-5 lg:space-y-0 flex flex-col lg:flex-row lg:place-content-between">
+        <div class="flex place-content-center">
+            <x-secondary-button-link href="{{ route('polls.my') }}" class="ms-3">
+                {{ __('Back') }}
+            </x-secondary-button-link>
+        </div>
         <div class="flex place-content-center">
             <x-primary-button class="ms-3">
                 {{ __('Confirm') }}
