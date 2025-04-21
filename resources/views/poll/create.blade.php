@@ -95,7 +95,7 @@
 
     <div class="mt-5 space-y-5 lg:space-y-0 flex flex-col lg:flex-row lg:place-content-between">
         <div class="flex place-content-center">
-            <x-secondary-button-link href="{{ route('polls.my') }}" class="ms-3">
+            <x-secondary-button-link href="{{ url()->previous() }}" class="ms-3">
                 {{ __('Back') }}
             </x-secondary-button-link>
         </div>
