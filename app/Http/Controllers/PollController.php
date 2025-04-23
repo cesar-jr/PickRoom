@@ -11,6 +11,7 @@ use App\Models\Vote;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -42,6 +43,9 @@ class PollController extends Controller
                 'in:user,public',
             ],
         ]);
+
+        abort_if($data['type'] != 'public' && !Auth::check(), 401);
+
         if ($data['type'] == 'public') {
             $records = Poll::where('type', PollType::PUBLIC);
         } else {

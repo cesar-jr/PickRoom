@@ -14,16 +14,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::get('/polls/list', [PollController::class, 'list'])->name('polls.list');
     Route::get('/polls/my', [PollController::class, 'my'])->name('polls.my');
     Route::post('/vote/{poll}/store', [VoteController::class, 'store'])->name('vote.store');
 });
+
+Route::get('/polls/list', [PollController::class, 'list'])->name('polls.list');
+Route::get('/polls', [PollController::class, 'index'])->name('polls.index');
 
 Route::get('/vote/login', [VoteController::class, 'redirectLogin'])->name('vote.login');
 Route::get('/vote/{poll}', [VoteController::class, 'create'])->name('vote.create');
 
 Route::resource('polls', PollController::class)
-    ->only(['index', 'create', 'store', 'update', 'show'])
+    ->only(['create', 'store', 'update', 'show'])
     ->middleware(['auth']);
 
 require __DIR__ . '/auth.php';
