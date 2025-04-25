@@ -21,12 +21,14 @@ Route::middleware('auth')->group(function () {
 Route::get('/polls/list', [PollController::class, 'list'])->name('polls.list');
 Route::get('/polls', [PollController::class, 'index'])->name('polls.index');
 
-Route::get('/vote/login', [VoteController::class, 'redirectLogin'])->name('vote.login');
+Route::get('/vote/login', [VoteController::class, 'redirectLogin'])->middleware(['guest'])->name('vote.login');
 Route::get('/vote/{poll}', [VoteController::class, 'create'])->name('vote.create');
 
 Route::resource('polls', PollController::class)
     ->only(['create', 'store', 'update', 'show'])
     ->middleware(['auth']);
+
+Route::view('/policy', 'tos');
 
 require __DIR__ . '/auth.php';
 
