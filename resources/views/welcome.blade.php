@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-3xl mx-auto px-6 py-12 text-center">
-        <h1 class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-4">🗳️ Welcome to PollPlay!</h1>
+        <h1 class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-4">🗳️ Welcome to PickRoom!</h1>
         <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
             Got opinions? Cast your vote or create your own poll and see what the crowd thinks!
         </p>
