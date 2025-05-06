@@ -56,6 +56,7 @@ class AuthenticatedSessionController extends Controller
             //     break;
 
             case 'x':
+                /** @disregard P1013 Undefined method */
                 return Socialite::driver('x')
                     ->scopes(['users.email'])
                     ->redirect();

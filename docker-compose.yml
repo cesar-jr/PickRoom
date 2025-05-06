@@ -4,7 +4,7 @@ services:
         depends_on:
             - postgresqldb
             - keydb
-        image: enquete-dev
+        image: laravel-dev
         restart: always
         ports:
             - "8080:80"
