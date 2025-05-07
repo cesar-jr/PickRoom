@@ -23,7 +23,7 @@
                             {{ __('Question') }}
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            {{ __('Action') }}
                         </th>
                     </tr>
                 </thead>

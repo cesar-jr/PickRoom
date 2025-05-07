@@ -13,9 +13,11 @@
                 </div>
                 <div class="flex justify-center p-3 text-gray-900 dark:text-gray-100">
                     <!-- trocar esse texto para translation plural depois -->
-                    {{ __("You have voted on") }}
+                    {{ trans_choice("messages.voted_on_pre", $votes_count) }}
+                    @if($votes_count)
                     <p class="mx-1 text-rose-600 dark:text-lime-400">{{ $votes_count }}</p>
-                    {{ __("polls") }}
+                    {{ trans_choice("messages.voted_on_pos", $votes_count) }}
+                    @endif
                 </div>
             </div>
         </div>

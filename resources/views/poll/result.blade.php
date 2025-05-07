@@ -13,7 +13,7 @@
         <p class="mt-1 text-sm/6 text-gray-600 dark:text-gray-200">{{ $poll->details }}</p>
         <hr class="border border-gray-900 my-2" />
         <p class="mt-1 text-md/5 text-gray-600 dark:text-gray-200">{{ __('Votes') }}: {{ $votes_count }}</p>
-        <p class="mt-1 text-md/5 text-gray-600 dark:text-gray-200">{{ $poll->type==\App\Enums\PollType::PUBLIC ? ('🔓 ' . __('Public')) : ('🔒 ' . __('Private')) }} {{ __('Poll') }}</p>
+        <p class="mt-1 text-md/5 text-gray-600 dark:text-gray-200">{{ $poll->type==\App\Enums\PollType::PUBLIC ? ('🔓 ' . __('Public Poll')) : ('🔒 ' . __('Private Poll')) }}</p>
         @if($poll->active)
         <p id="link-vote" data-link="{{ route('vote.create', ['poll' => $poll->slug]) }}" class="cursor-pointer text-md text-indigo-600 dark:text-indigo-500 hover:text-indigo-900 dark:hover:text-indigo-100 rounded-md">{{ __('Copy Poll link') }}</p>
         <p id="link-vote-temp" class="hidden text-md text-indigo-600 dark:text-indigo-500 rounded-md">{{ __('Copied to clipboard') }}</p>

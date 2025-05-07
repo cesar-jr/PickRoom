@@ -56,7 +56,7 @@
             <div class="flex flex-col items-center">
                 <!-- Help text -->
                 <span class="text-sm text-gray-700 dark:text-gray-400">
-                    {{ __('Showing') }} <span class="font-semibold text-gray-900 dark:text-white" id="from">1</span> {{ __('to') }} <span class="font-semibold text-gray-900 dark:text-white" id="to">10</span> {{ __('of') }} <span class="font-semibold text-gray-900 dark:text-white" id="total">100</span> {{ __('Entries') }}
+                    {{ __('Showing') }} <span class="font-semibold text-gray-900 dark:text-white" id="from">1</span> {{ __('to') }} <span class="font-semibold text-gray-900 dark:text-white" id="to">10</span> {{ __('of') }} <span class="font-semibold text-gray-900 dark:text-white" id="total">100</span> {{ __('entries') }}
                 </span>
                 <div class="inline-flex m-2 xs:mt-0">
                     <!-- Buttons -->

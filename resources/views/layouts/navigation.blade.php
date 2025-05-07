@@ -63,7 +63,7 @@
                 <a
                     href="{{ route('login') }}"
                     class="rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 ring-1 ring-transparent transition focus:outline-none">
-                    Log in
+                    {{ __("Log in") }}
                 </a>
             </div>
             @endauth
