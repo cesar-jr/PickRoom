@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\PollType;
 use App\Models\Poll;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -21,7 +22,7 @@ class PollPolicy
      */
     public function view(User $user, Poll $poll): Response
     {
-        return $poll->user()->is($user) ? Response::allow() : Response::denyWithStatus(404);
+        return $poll->user()->is($user) || $poll->type === PollType::PUBLIC ? Response::allow() : Response::denyWithStatus(404);
     }
 
     /**

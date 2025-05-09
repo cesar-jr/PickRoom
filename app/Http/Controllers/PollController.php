@@ -98,7 +98,7 @@ class PollController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Poll $poll)
+    public function show(Request $request, Poll $poll)
     {
         Gate::authorize('view', $poll);
 
@@ -122,6 +122,7 @@ class PollController extends Controller
             'poll' => $poll,
             'votes_by_options' => $votes_by_options,
             'votes_count' => $votes_count,
+            'owner' => $poll->user()->is($request->user()),
         ]);
     }
 

@@ -37,6 +37,7 @@
             </div>
             @endforeach
         </div>
+        @if($owner)
         <div class="flex place-content-center mt-4">
             <x-primary-button type="button" :disabled="!$poll->active" data-confirm-modal="end-poll" class="ms-3">
                 {{ __('End Poll') }}
@@ -50,5 +51,6 @@
             <x-confirm-modal id="end-poll" :question="__('Are you sure you want to end this poll?')" />
             @endif
         </div>
+        @endif
     </div>
 </x-app-layout>

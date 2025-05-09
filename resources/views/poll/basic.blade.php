@@ -15,6 +15,11 @@
                 </a>
             </p>
             @endunless
+            @if($see_results)
+            <a class="underline text-md text-indigo-600 dark:text-indigo-500 hover:text-indigo-900 dark:hover:text-indigo-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('polls.show', ['poll' => $poll]) }}">
+                {{ __('See Results') }}
+            </a>
+            @endif
             @foreach($errors->all() as $message)
             <p class="mt-1 text-sm/6 text-red-500 dark:text-red-200">{{ $message }}</p>
             @endforeach

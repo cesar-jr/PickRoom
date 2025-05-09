@@ -8,6 +8,7 @@ use App\Models\Poll;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class VoteController extends Controller
 {
@@ -37,6 +38,7 @@ class VoteController extends Controller
             'poll' => $poll,
             'disabled' => !$logged || $vote,
             'checked' => $vote?->options ?? [],
+            'see_results' => Gate::allows('view', $poll)
         ];
         if (!$poll->active)
             abort(404);
@@ -53,7 +55,10 @@ class VoteController extends Controller
         $vote->poll()->associate($poll);
         $vote->user()->associate($request->user());
         $vote->save();
-        return redirect(route("dashboard")); // confirmar se vai ser isso mesmo
+        if (Gate::allows('view', $poll))
+            return redirect(route("polls.show", ['poll' => $poll]));
+        else
+            return redirect(route("dashboard"));
     }
 
     /**
