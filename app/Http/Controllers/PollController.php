@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
 
 class PollController extends Controller
 {
@@ -22,11 +23,13 @@ class PollController extends Controller
      */
     public function index()
     {
+        Session::put('last_list', 'polls.index');
         return view('poll.public-list');
     }
 
     public function my()
     {
+        Session::put('last_list', 'polls.my');
         return view('poll.list');
     }
 
