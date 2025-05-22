@@ -9,6 +9,7 @@ use App\Models\Poll;
 use App\Models\Option;
 use App\Models\Vote;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,10 @@ class PollController extends Controller
 
         if ($data['type'] == 'public') {
             $records = Poll::where('type', PollType::PUBLIC);
+            $records->select('polls.*', DB::raw('votes.id is not null as voted'));
+            $records->leftJoin('votes', function (JoinClause $join) use ($request) {
+                $join->on('votes.poll_id', '=', 'polls.id')->where('votes.user_id', '=', Auth::check() ? $request->user()->id : 0);
+            });
         } else {
             $records = Poll::whereBelongsTo($request->user())->withCount('votes');
         }
@@ -58,7 +63,7 @@ class PollController extends Controller
             if ($data['search'] ?? null) {
                 $query->where('question', 'ilike', '%' . $data['search'] . '%');
             }
-        })->orderBy('id', 'desc');
+        })->orderBy('polls.id', 'desc');
         return $records->paginate(10)->withQueryString();
     }
 

@@ -32,7 +32,17 @@ const loadTable = function ({ search, url } = {}) {
                     newRow.addClass("clone").removeClass("original");
                     newRow.find(".question").text(value.question);
                     newRow.find(".votes").text(value.votes_count);
-                    newRow.find(".action").attr("href", `/vote/${value.slug}`);
+                    if (value.voted) {
+                        newRow
+                            .find(".action-results")
+                            .attr("href", `/polls/${value.slug}`);
+                        newRow.find(".action-vote").remove();
+                    } else {
+                        newRow
+                            .find(".action-vote")
+                            .attr("href", `/vote/${value.slug}`);
+                        newRow.find(".action-results").remove();
+                    }
                     newRow.show();
                     listNode.append(newRow);
                 });

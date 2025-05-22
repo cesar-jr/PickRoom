@@ -33,7 +33,8 @@
                             Mock
                         </td>
                         <td class="px-6 py-4">
-                            <a href="#" class="action font-medium text-indigo-600 dark:text-indigo-500 hover:underline">{{ __('Vote') }}</a>
+                            <a href="#" class="action-results font-medium text-indigo-600 dark:text-indigo-500 hover:underline">{{ __('See Results') }}</a>
+                            <a href="#" class="action-vote font-medium text-indigo-600 dark:text-indigo-500 hover:underline">{{ __('Vote') }}</a>
                         </td>
                     </tr>
                 </tbody>
